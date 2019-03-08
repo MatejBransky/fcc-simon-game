@@ -1,3 +1,221 @@
-body {
-  background: rgb(194, 194, 194);
+$blue: rgb(52, 52, 255);
+$red: rgb(219, 0, 0);
+$yellow: rgb(255, 217, 0);
+$green: rgb(0, 194, 0);
+$grey: rgb(212, 212, 212);
+$black: rgb(44, 44, 44);
+
+$game-size: 70vh;
+$dashboard-size: $game-size / 2.1;
+$game-padding: $game-size / 55;
+$button-spacing: $game-size / 42;
+$switch-size: 2vh;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  font-size: 1.5vh;
+}
+
+button:not(:disabled):hover {
+  cursor: pointer;
+}
+
+.Wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Game {
+  position: relative;
+  width: $game-size;
+  height: $game-size;
+  padding: $game-padding;
+  border-radius: 50%;
+  background: $black;
+  box-shadow: 0 0 20vh 0 grey;
+}
+
+.Game__buttons {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.Game__button {
+  $button-size: $game-size / 2 - $game-padding - ($button-spacing / 2);
+  $button-space: solid $button-spacing / 2 transparent;
+
+  width: $button-size;
+  height: $button-size;
+  border: none;
+  outline: none;
+  background-clip: padding-box;
+  filter: brightness(0.8);
+
+  &:active {
+    filter: brightness(1.8);
+  }
+
+  &--top-left {
+    border-top-left-radius: 100%;
+    border-right: $button-space;
+    border-bottom: $button-space;
+  }
+
+  &--top-right {
+    border-top-right-radius: 100%;
+    border-left: $button-space;
+    border-bottom: $button-space;
+  }
+
+  &--bottom-left {
+    border-bottom-left-radius: 100%;
+    border-right: $button-space;
+    border-top: $button-space;
+  }
+
+  &--bottom-right {
+    border-bottom-right-radius: 100%;
+    border-left: $button-space;
+    border-top: $button-space;
+  }
+
+  &--green {
+    background-color: $green;
+  }
+
+  &--red {
+    background-color: $red;
+  }
+
+  &--yellow {
+    background-color: $yellow;
+  }
+
+  &--blue {
+    background-color: $blue;
+  }
+}
+
+.Game__dashboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Dashboard {
+  width: $dashboard-size;
+  height: $dashboard-size;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: $grey;
+  border: solid $black $game-padding;
+}
+
+.Dashboard__title {
+  font-size: 4.5em;
+  font-weight: 600;
+}
+
+.Dashboard__controls {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Block__display {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  color: $red;
+  background: $black;
+  border-radius: 0.5vh;
+}
+
+.Block__button {
+  $size: $game-padding * 3;
+
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  border: solid 0.5vh $black;
+  outline: none;
+  box-shadow: 1px 2px 5px 0 $black;
+
+  &:active {
+    box-shadow: 0 0 0 0 grey;
+  }
+
+  &--red {
+    background: $red;
+  }
+
+  &--yellow {
+    background: $yellow;
+  }
+}
+
+.Switch {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Switch__socket {
+  width: 2 * $switch-size;
+  height: $switch-size;
+  display: flex;
+  align-content: stretch;
+  padding: 0 ($switch-size - $switch-size / 1.5) / 2;
+  background: $black;
+  border-radius: 0.3vh;
+  border: none;
+  outline: none;
+}
+
+.Switch--on .Switch__socket {
+  justify-content: flex-end;
+}
+
+.Switch--off .Switch__socket {
+  justify-content: flex-start;
+}
+
+.Switch__handle {
+  $size: $switch-size / 1.4;
+
+  width: $size;
+  height: $size;
+  display: inline-block;
+  background: $blue;
+  filter: brightness(1.6);
+  border-radius: 0.2vh;
+  box-shadow: 1px 2px 5px 0 $black;
 }
