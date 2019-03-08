@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "jsx": "react",
+    "noEmit": true,
+    "strict": true,
+    "baseUrl": "./",
+    "paths": { "@/*": ["src/*"] },
+    "esModuleInterop": true,
+    "experimentalDecorators": true
+  },
+  "exclude": ["node_modules", "static", ".cache"]
+}
