@@ -2,6 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import './styles.scss';
-import TimerView from './TimerView';
+import App from './components/App';
 
-render(<TimerView />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
