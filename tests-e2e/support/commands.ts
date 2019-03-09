@@ -23,3 +23,21 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+/* eslint @typescript-eslint/no-namespace: 0 */
+
+declare namespace Cypress {
+  interface Chainable {
+    getBtn: (label: string) => Cypress.Chainable<JQuery>;
+  }
+}
+
+function getBtn(label: string) {
+  cy.contains(label)
+    .parent()
+    .within(() => {
+      cy.get('button');
+    });
+}
+
+Cypress.Commands.add('getBtn', getBtn);

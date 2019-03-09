@@ -2,6 +2,10 @@
 
 describe('game', () => {
   it('should start after turning on', () => {
-    cy.visit('/');
+    cy.visit('/')
+      .getBtn('Start')
+      .click()
+      .wait(500)
+      .click();
   });
 });
