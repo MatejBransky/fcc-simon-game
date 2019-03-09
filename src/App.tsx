@@ -8,7 +8,6 @@ const App = () => {
   const btnYellow = useRef(null);
   const btnBlue = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const count = state.steps.length;
 
   return (
     <div className="Wrapper">
@@ -40,12 +39,17 @@ const App = () => {
 
           <div className="Dashboard__controls Controls">
             <div className="Controls__block Block">
-              <div className="Block__display">{count}</div>
+              <div className="Block__display" data-testid="display">
+                {state.on && state.display}
+              </div>
               <p className="Block__description">Count</p>
             </div>
 
             <div className="Controls__block Block">
-              <button className="Block__button Block__button--red" />
+              <button
+                className="Block__button Block__button--red"
+                onClick={() => dispatch({ type: 'start' })}
+              />
               <p className="Block__description">Start</p>
             </div>
 
@@ -61,9 +65,13 @@ const App = () => {
               'Dashboard__switch Switch ' +
               (state.on ? 'Switch--on' : 'Switch--off')
             }
+            data-testid="switch"
           >
             <p className="Switch__text Switch__text--left">Off</p>
-            <button className="Switch__socket">
+            <button
+              className="Switch__socket"
+              onClick={() => dispatch({ type: 'toggle' })}
+            >
               <div className={'Switch__handle '} />
             </button>
             <p className="Switch__text Switch__text--right">On</p>

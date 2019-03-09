@@ -28,16 +28,24 @@
 
 declare namespace Cypress {
   interface Chainable {
+    getByTestId: (testId: string) => Cypress.Chainable<JQuery>;
     getBtn: (label: string) => Cypress.Chainable<JQuery>;
   }
 }
 
-function getBtn(label: string) {
-  cy.contains(label)
-    .parent()
-    .within(() => {
-      cy.get('button');
-    });
-}
+Cypress.Commands.add('getByTestId', (testId: string) => {
+  cy.get(`[data-testid=${testId}]`).as(testId);
+});
 
-Cypress.Commands.add('getBtn', getBtn);
+Cypress.Commands.add('getBtn', (label: string) => {
+  if (label.charAt(0) === ':') {
+    const color = label.slice(1);
+    cy.get(`[data-testid=button-${color}]`);
+  } else {
+    cy.contains(label)
+      .parent()
+      .within(() => {
+        cy.get('button');
+      });
+  }
+});
