@@ -1,6 +1,7 @@
-import React, { useRef, useReducer } from 'react';
+import React, { useEffect, useRef, useReducer } from 'react';
 
 import reducer, { initialState } from './reducer';
+import useInterval from './useInterval';
 
 const App = () => {
   const btnGreen = useRef(null);
@@ -8,6 +9,16 @@ const App = () => {
   const btnYellow = useRef(null);
   const btnBlue = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useInterval(() => dispatch({ type: 'blink' }), state.interval);
+
+  useEffect(() => {
+    if (state.interval > 0) {
+      setTimeout(() => {
+        dispatch({ type: 'stop-blink' });
+      }, 3000);
+    }
+  }, [state.interval]);
 
   return (
     <div className="Wrapper">

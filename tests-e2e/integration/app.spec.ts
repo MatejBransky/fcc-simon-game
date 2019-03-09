@@ -37,11 +37,20 @@ describe('game', () => {
 
     cy.getByTestId('display').should('have.text', '--');
 
+    cy.clock(); // mock setTimeout, setInterval,.. (related cy.tick(ms))
     cy.getBtn('Start').click();
-
-    // cy.getByTestId('display')
-    //   .should('have.text', '')
-    //   .wait(500)
-    //   .should('have.text', '--');
+    /**
+     * blinks with the text '--' for 3 seconds
+     */
+    const timeout = 3000; // ms
+    const interval = 300; // ms
+    for (let i = 0; i < timeout / interval; i++) {
+      cy.getByTestId('display', { timeout: 0 }).should(
+        'have.text',
+        i % 2 ? '' : '--'
+      );
+      cy.tick(interval);
+    }
+    cy.getByTestId('display', { timeout: 0 }).should('have.text', '01');
   });
 });
