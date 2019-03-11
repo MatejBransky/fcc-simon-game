@@ -147,7 +147,10 @@ export const gameMachine = Machine(
           lose: {
             type: 'final',
             on: {
-              START: 'intro',
+              START: {
+                actions: 'restart',
+                target: 'intro',
+              },
             },
           },
         },
@@ -157,6 +160,10 @@ export const gameMachine = Machine(
   {
     actions: {
       resetContext: assign(initialContext),
+      restart: assign(ctx => ({
+        ...initialContext,
+        strict: ctx.strict,
+      })),
       toggleStrict: assign({
         strict: ctx => !ctx.strict,
       }),
